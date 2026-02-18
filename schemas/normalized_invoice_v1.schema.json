@@ -1,0 +1,71 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "normalized_invoice_v1",
+  "title": "NormalizedInvoiceV1",
+  "type": "object",
+  "required": [
+    "source",
+    "invoice",
+    "amounts",
+    "line_items",
+    "meta"
+  ],
+  "properties": {
+    "source": {
+      "type": "object",
+      "required": ["vendor", "invoice_type", "file_name"],
+      "properties": {
+        "vendor": {"type": "string"},
+        "invoice_type": {"type": "string"},
+        "file_name": {"type": "string"}
+      },
+      "additionalProperties": true
+    },
+    "invoice": {
+      "type": "object",
+      "properties": {
+        "invoice_number": {"type": ["string", "null"]},
+        "invoice_date": {"type": ["string", "null"]},
+        "due_date": {"type": ["string", "null"]},
+        "currency": {"type": ["string", "null"]},
+        "vendor_name": {"type": ["string", "null"]},
+        "bill_to_name": {"type": ["string", "null"]}
+      },
+      "additionalProperties": true
+    },
+    "amounts": {
+      "type": "object",
+      "properties": {
+        "subtotal": {"type": ["number", "null"]},
+        "tax": {"type": ["number", "null"]},
+        "total": {"type": ["number", "null"]}
+      },
+      "additionalProperties": true
+    },
+    "line_items": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "description": {"type": ["string", "null"]},
+          "quantity": {"type": ["number", "null"]},
+          "unit_price": {"type": ["number", "null"]},
+          "amount": {"type": ["number", "null"]}
+        },
+        "additionalProperties": true
+      }
+    },
+    "meta": {
+      "type": "object",
+      "required": ["latency_ms", "cost_usd_estimated", "parse_status"],
+      "properties": {
+        "latency_ms": {"type": "number"},
+        "cost_usd_estimated": {"type": ["number", "null"]},
+        "parse_status": {"type": "string"},
+        "error_message": {"type": ["string", "null"]}
+      },
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": false
+}

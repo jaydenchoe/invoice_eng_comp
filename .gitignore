@@ -1,0 +1,8 @@
+.env
+__pycache__/
+*.pyc
+.DS_Store
+.pycache/
+artifacts/
+invoices/input/
+invoices/manifests/
