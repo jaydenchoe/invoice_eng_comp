@@ -3,6 +3,11 @@
 Last updated: 2026-03-01 (Asia/Seoul)
 
 ## Progress Log
+- 2026-03-01: All current local changes committed and pushed to GitHub (`main`, commit `2c51359`).
+  - Includes: `README.md`, `SYSTEM_SUMMARY.md`, `TODO.md`, `reports/*`, `docs/*`
+  - GitHub Pages content prepared under `docs/`
+  - Target URL: `https://jaydenchoe.github.io/invoice_eng_comp/`
+  - Current check: `404` (repository Pages setting still needs to be enabled)
 - 2026-03-01: Single-file smoke run completed on `Outre/SINV1647411.pdf` with 3 engines (`veryfi,nanonets,upstage`).
   - Veryfi: `HTTP 403` (auth/plan/quota recheck needed), response saved at `artifacts/raw/smoke_single_20260301/veryfi_response.json`
   - Nanonets: `HTTP 200`, key fields detected (`invoice_number=SINV1647411`, `invoice_amount=800.00`)
