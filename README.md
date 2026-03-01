@@ -74,10 +74,50 @@ This project uses one active mode per vendor (not every possible mode).
 3. For fair comparison, evaluate only normalized outputs and the same required fields.
 4. Project decision: Google Document AI stays **Custom Extractor only**.
 
+## Schema Strategy For Diverse Invoice Types
+Question: if invoice layouts vary, should we create one schema per type, or force one engine/schema for all?
+
+### Short answer
+Use a **hybrid strategy**:
+1. Keep one canonical output schema for evaluation (`normalized_invoice_v1`).
+2. Group invoice types into 2-4 families and use one extraction schema/model per family.
+3. Split into fully separate schemas only when line-item/table semantics are fundamentally different.
+
+### Why this is better than extremes
+- One schema per invoice template:
+  - High precision early, but maintenance cost grows quickly as formats drift.
+  - Community/open-source template projects (for example `invoice2data`) explicitly operate template-by-template, and users report ongoing debugging/maintenance pain in issue threads.
+- One universal schema for everything:
+  - Lower maintenance, but recall drops when table structures differ too much (different columns, units, discount/tax logic).
+- Hybrid (recommended):
+  - Preserves one benchmark target while allowing type-aware extraction where needed.
+  - Fits your chosen stack: Document AI Custom Extractor + Nanonets Custom + Upstage Universal (schema-driven), with Veryfi as prebuilt baseline.
+
+### Split vs Group decision rules
+Create a separate type-family schema/model when at least one is true:
+1. Line item column meaning differs (e.g., `qty x unit_price` vs weight/pack-size price logic).
+2. Required fields differ by business logic (e.g., credit memo style vs standard invoice).
+3. One family causes repeated extraction failure/noise in another family.
+
+Keep grouped when:
+1. Header fields are mostly shared (`invoice_number/date/due_date/subtotal/tax/total`).
+2. Table differences can be normalized by adapter mapping without losing meaning.
+3. Accuracy delta is small enough versus operational cost.
+
+### Practical plan for this repo
+1. Keep `normalized_invoice_v1` as the only scoring schema.
+2. Start with 4 invoice types grouped into 2-4 families (initially same as current type folders).
+3. Use one extractor config per family for:
+   - Document AI Custom Extractor
+   - Nanonets Custom Model
+   - Upstage Universal `response_format` schema
+4. Revisit grouping after first benchmark round (12-20 docs).
+
 ### Sources
 - Veryfi docs (data extraction + model training updates): [docs.veryfi.com](https://docs.veryfi.com/) and [Model Training](https://docs.veryfi.com/api/getting-started/model-training/)
 - Nanonets prebuilt invoice/custom model docs: [Invoices](https://docs.nanonets.com/docs/invoices), [Pre-Built Model](https://docs.nanonets.com/docs/setup-pre-built-model), [Custom Model](https://docs.nanonets.com/docs/setup-custom-model)
-- Google Document AI extraction docs: [Extraction overview](https://docs.cloud.google.com/document-ai/docs/extracting-overview), [Custom extractor with generative AI](https://docs.cloud.google.com/document-ai/docs/ce-with-genai)
-- Upstage Information Extraction API console references: [Universal Extraction](https://console.upstage.ai/api/information-extraction/universal-extraction), [Schema Generation](https://console.upstage.ai/api/information-extraction/universal-extraction/schema-generation), [Async](https://console.upstage.ai/api/information-extraction/universal-extraction/async), [Prebuilt Extraction](https://console.upstage.ai/api/information-extraction/prebuilt-extraction)
+- Google Document AI docs: [Extraction overview](https://docs.cloud.google.com/document-ai/docs/extracting-overview), [Template-based extraction](https://docs.cloud.google.com/document-ai/docs/template-based-extraction), [Custom extractor with generative AI](https://docs.cloud.google.com/document-ai/docs/ce-with-genai), [Custom splitter](https://docs.cloud.google.com/document-ai/docs/custom-splitter)
+- Upstage references: [Universal Extraction](https://console.upstage.ai/api/information-extraction/universal-extraction), [Schema Generation](https://console.upstage.ai/api/information-extraction/universal-extraction/schema-generation), [Async](https://console.upstage.ai/api/information-extraction/universal-extraction/async), [Prebuilt Extraction](https://console.upstage.ai/api/information-extraction/prebuilt-extraction), [Universal extraction blog](https://www.upstage.ai/blog/en/introducing-upstage-universal-information-extraction)
+- Community references: [`invoice2data` project](https://github.com/invoice-x/invoice2data), [maintenance discussion example](https://github.com/invoice-x/invoice2data/issues/339)
 
 Inference note: rows above reflect the currently selected operating mode for each vendor in this project, not all product modes each vendor offers.
