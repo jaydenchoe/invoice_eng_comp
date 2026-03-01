@@ -80,6 +80,12 @@
 - 짧은 수명의 토큰(예: GCP access token)은 만료 시 재발급 필요
 - 채팅에 노출된 키는 반드시 rotate(재발급) 권장
 
+## 10-1) 인증 방식 요약
+- Google Document AI: **OAuth 기반 Bearer access token** (`GDOCAI_ACCESS_TOKEN`)
+- Veryfi: **API key 계열** (Client ID + Username + API Key 조합)
+- Nanonets: **API key 계열** (Basic Auth username에 API key)
+- Upstage: **API key 계열** (Bearer API Key)
+
 ## 11) 다음 액션
 1. 12건 또는 20건 manifest 확정
 2. 4개 벤더 동일 샘플 일괄 실행

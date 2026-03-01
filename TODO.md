@@ -3,6 +3,15 @@
 Last updated: 2026-03-01 (Asia/Seoul)
 
 ## Progress Log
+- 2026-03-01: Veryfi credentials switched to new account (`camille.choe`) and retested on `Outre/SINV1647411.pdf`.
+  - Veryfi: `HTTP 201` (resolved from previous 403), `invoice_number=SINV1647411`, `total=800.0`, `line_items=6`
+  - Saved files updated:
+    - `artifacts/raw/smoke_single_20260301/veryfi_response.json`
+    - `artifacts/raw/smoke_single_20260301/veryfi_http.txt`
+- 2026-03-01: Veryfi account state confirmed as trial ended.
+  - Message: `Your trial has ended. Please contact support@veryfi.com to upgrade your account.`
+  - Impact: Veryfi API calls are blocked until billing/support action is completed.
+  - Temporary plan: continue smoke/benchmark with `nanonets,upstage,gdocai`; mark Veryfi as blocked in comparison notes.
 - 2026-03-01: All current local changes committed and pushed to GitHub (`main`, commit `2c51359`).
   - Includes: `README.md`, `SYSTEM_SUMMARY.md`, `TODO.md`, `reports/*`, `docs/*`
   - GitHub Pages content prepared under `docs/`
