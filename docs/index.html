@@ -1,2 +1,40 @@
-<!doctype html><html lang="ko"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>Invoice Smoke Report</title>
-<style>:root{--bg:#f5f7fb;--card:#fff;--text:#1c2430;--line:#dfe6ef}body{margin:0;padding:24px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text)}.wrap{max-width:1100px;margin:0 auto}.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px;margin-bottom:16px}table{width:100%;border-collapse:collapse}th,td{border-bottom:1px solid var(--line);padding:10px 8px;text-align:left}th{background:#f9fbff}code{background:#eef2f7;padding:2px 6px;border-radius:6px}</style></head><body><div class="wrap"><div class="card"><h1>Invoice Smoke Report (Single File)</h1><div>Sample: <code>invoices/input/Outre/SINV1647411.pdf</code> | Generated: 2026-03-01</div></div><div class="card"><table><thead><tr><th>Service</th><th>HTTP</th><th>Time (s)</th><th>Invoice #</th><th>Invoice Date</th><th>Total</th><th>Line Items</th><th>Error</th></tr></thead><tbody><tr><td>Veryfi</td><td>201</td><td>3.754</td><td>SINV1647411</td><td>2023-03-03 00:00:00</td><td>800.0</td><td>6</td><td>-</td></tr><tr><td>Nanonets</td><td>200</td><td>14.038</td><td>SINV1647411</td><td>03/03/23</td><td>800.00</td><td>1</td><td>-</td></tr><tr><td>Upstage</td><td>200</td><td>7.806</td><td>SINV1647411</td><td>03/03/23</td><td>800.0</td><td>3</td><td>-</td></tr><tr><td>Google Document AI</td><td>200</td><td>12.893</td><td>SINV1647411</td><td>03/03/23</td><td>-</td><td>-</td><td>-</td></tr></tbody></table></div></div></body></html>
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Invoice Smoke Report</title>
+  <style>
+    :root { --bg:#f5f7fb; --card:#ffffff; --text:#1c2430; --line:#dfe6ef; }
+    body { margin:0; padding:24px; font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; background:var(--bg); color:var(--text); }
+    .wrap { max-width:1100px; margin:0 auto; }
+    .card { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:16px; margin-bottom:16px; }
+    table { width:100%; border-collapse:collapse; font-size:14px; }
+    th, td { border-bottom:1px solid var(--line); padding:10px 8px; text-align:left; }
+    th { background:#f9fbff; }
+    code { background:#eef2f7; padding:2px 6px; border-radius:6px; }
+    .meta { color:#5b6878; font-size:13px; margin-top:8px; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card">
+      <h1 style="margin:0 0 8px">Invoice Smoke Report (Single File)</h1>
+      <div>Sample: <code>invoices/input/Outre/SINV1647411.pdf</code> | Generated: 2026-03-01</div>
+      <div class="meta">GDocAI derived total from line-item properties: items=3, total=800.0, entities=10</div>
+    </div>
+    <div class="card">
+      <table>
+        <thead>
+          <tr>
+            <th>Service</th><th>HTTP</th><th>Time (s)</th><th>Invoice #</th><th>Invoice Date</th><th>Total</th><th>Line Items</th><th>Error</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Veryfi</td><td>201</td><td>3.754</td><td>SINV1647411</td><td>2023-03-03 00:00:00</td><td>800.0</td><td>6</td><td>-</td></tr><tr><td>Nanonets</td><td>200</td><td>14.038</td><td>SINV1647411</td><td>03/03/23</td><td>800.00</td><td>1</td><td>-</td></tr><tr><td>Upstage</td><td>200</td><td>7.806</td><td>SINV1647411</td><td>03/03/23</td><td>800.0</td><td>3</td><td>-</td></tr><tr><td>Google Document AI</td><td>200</td><td>12.893</td><td>SINV1647411</td><td>03/03/23</td><td>800.0</td><td>3</td><td>-</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</body>
+</html>

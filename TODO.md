@@ -32,6 +32,17 @@ Last updated: 2026-03-01 (Asia/Seoul)
     - `artifacts/raw/smoke_single_20260301/gdocai_response.json`
     - `artifacts/raw/smoke_single_20260301/gdocai_http.txt`
     - `artifacts/raw/smoke_single_20260301/gdocai_summary.json`
+- 2026-03-01: Clarified why Google Document AI showed blank `total/line_items/error` on report table.
+  - Current entity types from this Custom Extractor: `invoice_number`, `invoice_date`, `supplier_name`, `ship_to_name`, `variants`, `outre_line_item`.
+  - `total/subtotal/tax` are not direct entity types in this processor output, so report fields appeared blank.
+  - `outre_line_item` contains structured properties (`description`, `discounted_unit_price`, `shipped_quantity`) and can be used to derive totals.
+- 2026-03-01: Report logic updated to derive Google Document AI totals from `outre_line_item` properties.
+  - Derived formula: `sum(shipped_quantity * discounted_unit_price)` when direct amount is missing
+  - Updated files:
+    - `reports/smoke_single_20260301.html`
+    - `docs/index.html`
+    - `docs/smoke_single_20260301.html`
+    - `artifacts/raw/smoke_single_20260301/gdocai_summary.json`
 - 2026-03-01: Web-view report generated for easy result review.
   - Report HTML: `reports/smoke_single_20260301.html`
   - Shortcut index: `reports/index.html`
